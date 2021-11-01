@@ -1,0 +1,19 @@
+{
+  "name": "btc-basket",
+  "version": "1.0.0",
+  "description": "CPI Basket Represented in Bitcoin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Bitcoin",
+    "CPI",
+    "Price"
+  ],
+  "author": "Joey Woolever",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
