@@ -1,4 +1,6 @@
-<script></script>
+<script>
+    // import price from page that calls api
+</script>
 
 
 
