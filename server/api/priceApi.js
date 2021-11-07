@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 /* -------------------------------
 
 this file calls the coinmarketcap api and gets the price
@@ -23,17 +21,17 @@ const requestOptions = {
 
 const getPrice = async () => {
   try {
-    const btcPrice = await axios.get(
+    const btcResObj = await axios.get(
       "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC",
       requestOptions
     );
-        return btcPrice.data
+        return btcResObj.data.data //obj has weird shape has nested keys with same namespace
   } catch (err) {
     console.error(err);
   }
 };
 let res = await getPrice()
-let usdPrice = res.data.BTC.quote.USD.price //! returned as a number needs to be rounded
+let usdPrice = res.BTC.quote.USD.price //! returned as a number needs to be rounded
 
 console.log(usdPrice)
 export default usdPrice
