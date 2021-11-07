@@ -1,23 +1,36 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { Conn, PORT } from "./connect";
+import { Conn } from "./connect.js";
+import BlockModel from "./models/blockModel.js";
+import btcData from "./routes/btcData.js";
 
 const app = express();
+const PORT = process.env.PORT || 5555;
 
-//? middleware--------------------------
+/* -------------------------------
+
+this will run middleware start back-end server and connect to db
+
+----------------------------------*/
+
+//? middleware------------------------------
 app.use(express.json({ limit: "30mb", exteneded: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-//! we can add routes here after we make them
+app.use("/", btcData);
 
-
-Conn().then(() => {
-  app.listen(PORT, () => {
-    console.log(`server running on ${PORT}`)
+//? connect to DB and run server ------------
+Conn()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`server running on ${PORT}`);
+    });
   })
-})
-.catch((err) => {
-  console.error(err)
-})
+  .then(() => {
+    const data = BlockModel.create({ price: 27, block: 1137 });
+  })
+  .catch((err) => {
+    console.error(err);
+  });

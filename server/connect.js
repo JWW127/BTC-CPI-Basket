@@ -1,16 +1,20 @@
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-dotenv.config()
+/* -------------------------------
+
+this is functionality to connect to the db exported to index
+
+----------------------------------*/
+
+//get values from .env file
+dotenv.config();
 
 //db connection
-const DB = process.env.DB
+const DB = process.env.DB;
 export const Conn = () => {
   return mongoose.connect(DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-  })
-}
-
-//server port
-export const PORT = process.env.PORT || 5000
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};

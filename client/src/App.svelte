@@ -2,7 +2,7 @@
 	import Block from './components/Block.svelte'
 	import Price from './components/Price.svelte'
 	
-	const temp = "temp"
+	
 </script>
 
 <main class="temp">
