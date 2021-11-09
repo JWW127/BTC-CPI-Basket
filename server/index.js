@@ -4,6 +4,7 @@ import { Conn } from "./connect.js";
 import BlockModel from "./models/blockModel.js";
 import btcData from "./routes/btcData.js";
 import getPrice from "./api/priceApi.js";
+import { Mongoose } from "mongoose";
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -15,20 +16,30 @@ this will run middleware start back-end server and connect to db
 ----------------------------------*/
 
 //? middleware------------------------------
+
 app.use(express.json({ limit: "30mb", exteneded: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/", btcData);
 
-//? server cleanup ---------------------------------
+//? server/db cleanup ---------------------------------
+
 const handleShutdown = (server) => {
+  console.log("shutting down database connection");
+  Mongoose.connect.close(function () {
+    process.exit(0);
+  });
   console.log("shutting down server.");
   server.close(() => {
     console.info("server closed");
     process.exit(0);
   });
 };
+
+process.on("SIGINT", handleShutdown);
+process.on("SIGTERM", handleShutdown);
+process.on("SIGHUP", handleShutdown);
 
 //? connect to DB and run express server ------------
 
@@ -38,10 +49,10 @@ const handleDataUpdate = async () => {
     console.log("connected to db");
     let serverInstance = app.listen(PORT);
     console.log(`express server running on port ${PORT}`);
-    
+    //-------- clear api interval cleanup server
     setTimeout(() => {
-      clearInterval(apiInterval)
-      console.log('stopping api calls')
+      clearInterval(apiInterval);
+      console.log("stopping api calls");
       handleShutdown(serverInstance);
     }, 300000);
   } catch (err) {
@@ -50,12 +61,12 @@ const handleDataUpdate = async () => {
 };
 
 const callApi = async () => {
-    let res = await getPrice();
-    let usdPrice = res.BTC.quote.USD.price;
-    console.log(usdPrice)
-    await BlockModel.create({price: usdPrice})
-    console.log(`new price ${usdPrice} added to db`)
-}
+  let res = await getPrice();
+  let usdPrice = res.BTC.quote.USD.price;
+  console.log(usdPrice);
+  await BlockModel.create({ price: usdPrice });
+  console.log(`new price ${usdPrice} added to db`);
+};
 
-handleDataUpdate()
-const apiInterval = setInterval(callApi, 60000)
+handleDataUpdate(); // start connections and servers
+const apiInterval = setInterval(callApi, 60000); // make api call and collection insert
