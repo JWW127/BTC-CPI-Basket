@@ -8,7 +8,6 @@ define our schema and create our model
 
 const blockSchema = new mongoose.Schema({
   price: Number,
-  block: Number,
   created: {
     type: Date,
     default: new Date(),

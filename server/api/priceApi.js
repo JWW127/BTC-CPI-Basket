@@ -31,7 +31,7 @@ const getPrice = async () => {
   }
 };
 let res = await getPrice()
-let usdPrice = res.BTC.quote.USD.price //! returned as a number needs to be rounded
+let usdPrice = res.BTC.quote.USD.price //! returned as a float/number needs to be rounded
 
 console.log(usdPrice)
-export default usdPrice
+export default getPrice
