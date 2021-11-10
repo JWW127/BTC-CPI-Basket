@@ -8,9 +8,9 @@ these are the controllers that are called via our router
 
 export const getBlock = async (req, res) => {
   try {
-    const blockData = await BlockModel.find();
+    const newData = await BlockModel.findOne().sort({_id: -1});
     console.log("getting data");
-    res.status(200).json(blockData);
+    return res.status(200).json(newData);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

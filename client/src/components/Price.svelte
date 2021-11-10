@@ -1,12 +1,11 @@
 <script>
-import App from "../App.svelte";
-
-  // import price from page that calls api or from database store?
-  
+  //price comes in from app.svelte via a fetch to our db, then it is passed to prop below and into our component.
+  export let latestPrice
+  //need to add some reactive stuff here or in CPI file to calculate CPI? 
 </script>
 
 <div>
-  <div class="temp priceBlock"><h1>{59999}</h1></div>
+  <div class="temp priceBlock"><h1>${latestPrice}</h1></div>
   <h3>Price</h3>
 </div>
 

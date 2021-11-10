@@ -4,7 +4,7 @@ import { Conn } from "./connect.js";
 import BlockModel from "./models/blockModel.js";
 import btcData from "./routes/btcData.js";
 import getPrice from "./api/priceApi.js";
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -21,25 +21,25 @@ app.use(express.json({ limit: "30mb", exteneded: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/", btcData);
+app.use("/api", btcData);
 
 //? server/db cleanup ---------------------------------
 
-const handleShutdown = (server) => {
-  console.log("shutting down database connection");
-  Mongoose.connect.close(function () {
-    process.exit(0);
-  });
-  console.log("shutting down server.");
-  server.close(() => {
-    console.info("server closed");
-    process.exit(0);
-  });
-};
+// const handleShutdown = (server) => {
+//   console.log("shutting down database connection");
+//   mongoose.connect.close(function () {
+//     process.exit(0);
+//   });
+//   console.log("shutting down server.");
+//   server.close(() => {
+//     console.info("server closed");
+//     process.exit(0);
+//   });
+// };
 
-process.on("SIGINT", handleShutdown);
-process.on("SIGTERM", handleShutdown);
-process.on("SIGHUP", handleShutdown);
+// process.on("SIGINT", handleShutdown);
+// process.on("SIGTERM", handleShutdown);
+// process.on("SIGHUP", handleShutdown);
 
 //? connect to DB and run express server ------------
 
@@ -54,7 +54,7 @@ const handleDataUpdate = async () => {
       clearInterval(apiInterval);
       console.log("stopping api calls");
       handleShutdown(serverInstance);
-    }, 300000);
+    }, 600000);
   } catch (err) {
     console.error(err);
   }
