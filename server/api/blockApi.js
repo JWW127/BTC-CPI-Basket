@@ -2,7 +2,7 @@ import axios from "axios";
 
 const requestOptions2 = {
   headers: {
-    "X-CMC_PRO_API_KEY": "replace with your api token",
+    "X-CMC_PRO_API_KEY": "f8525b49-4d99-4e08-816d-ab7a01456729",
   },
   qs: {
     start: "1",

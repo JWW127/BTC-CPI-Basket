@@ -9,7 +9,7 @@ this file calls the coinmarketcap api and gets the price
 
 const requestOptions = {
   headers: {
-    "X-CMC_PRO_API_KEY": "replace with your api token", 
+    "X-CMC_PRO_API_KEY": "f8525b49-4d99-4e08-816d-ab7a01456729", 
   },
   qs: {
     start: "1",

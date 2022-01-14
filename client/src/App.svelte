@@ -31,18 +31,20 @@
     margin: 0 auto;
   }
   .temp {
-    border: 1px solid #ff3e00;
-    background-color: bisque;
+    box-shadow: var(--shadow-elevation-high);
+    border-radius: 5px;
   }
 
   h1 {
-    color: #ff3e00;
+    background: whitesmoke;
+    color: #f2c41c;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
   }
 
   .container {
+    background: white;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

@@ -12,8 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ff3e00;
-    border: 1px solid #ff3e00;
+    color: #f2c41c;
+    border: 1px solid #f2c41c;
     padding: 1rem;
     width: 400px;
     height: 200px;
@@ -21,7 +21,7 @@
   }
 
   h1 {
-    color: #ff3e00;
+    color: #f2c41c;
     text-transform: uppercase;
     font-size: 6em;
     font-weight: 100;
