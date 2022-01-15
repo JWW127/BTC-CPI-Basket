@@ -6,10 +6,9 @@ this file calls the coinmarketcap api and gets the price
 
 ----------------------------------*/
 
-
 const requestOptions = {
   headers: {
-    "X-CMC_PRO_API_KEY": "f8525b49-4d99-4e08-816d-ab7a01456729", 
+    "X-CMC_PRO_API_KEY": "your key here",
   },
   qs: {
     start: "1",
@@ -25,13 +24,13 @@ const getPrice = async () => {
       "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC",
       requestOptions
     );
-        return btcResObj.data.data //obj has weird shape has nested keys with same namespace
+    return btcResObj.data.data; //obj has weird shape has nested keys with same namespace
   } catch (err) {
     console.error(err);
   }
 };
-let res = await getPrice()
-let usdPrice = res.BTC.quote.USD.price //! returned as a float/number needs to be rounded
+let res = await getPrice();
+let usdPrice = res.BTC.quote.USD.price; //! returned as a float/number needs to be rounded
 
-console.log(usdPrice)
-export default getPrice
+console.log(usdPrice);
+export default getPrice;
