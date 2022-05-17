@@ -13,3 +13,7 @@ This project is to help clarify the value of the Dollar and the value of Bitcoin
 - Axios
 - Mongoose
 - Cors
+
+### Additional Requirements
+- Mongo Database
+- Api key from Coinmarketcap
